@@ -81,3 +81,14 @@ functions:
           path: notes/{id}
           cors: true
           method: put
+  
+  deleteNote:
+    # Defines an HTTP API endpoint that calls the main function in deleteNote.js
+    # - path: url path is /notes/{id}
+    # - method: DELETE request
+    handler: src/functions/notes/deleteNote.main
+    events:
+      - http:
+          path: notes/{id}
+          cors: true
+          method: delete
