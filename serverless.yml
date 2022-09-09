@@ -59,3 +59,14 @@ functions:
           path: notes/{id}
           cors: true
           method: get
+
+  getAllNotes:
+    # Defines an HTTP API endpoint that calls the main function in getAllNotes.js
+    # - path: url path is /notes
+    # - method: GET request
+    handler: functions/notes/getAllNotes.main
+    events:
+      - http:
+          path: notes/{userId}
+          cors: true
+          method: get
