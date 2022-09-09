@@ -1,5 +1,5 @@
 {
-  "body": "{\"content\":\"new world\"}",
+  "body": "{\"content\":\"content 2\"}",
   "pathParameters": {
     "id": "e50ffda0-302f-11ed-829c-1dc60b948a2d",
     "userId": "123"

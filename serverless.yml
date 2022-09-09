@@ -42,7 +42,7 @@ functions:
     # Defines an HTTP API endpoint that calls the main function in create.js
     # - path: url path is /notes
     # - method: POST request
-    handler: createNotes.main
+    handler: src/functions/notes/createNotes.main
     events:
       - http:
           path: notes
@@ -53,7 +53,7 @@ functions:
     # Defines an HTTP API endpoint that calls the main function in getNote.js
     # - path: url path is /notes/{id}
     # - method: GET request
-    handler: functions/notes/getNote.main
+    handler: src/functions/notes/getNote.main
     events:
       - http:
           path: notes/{id}
@@ -64,7 +64,7 @@ functions:
     # Defines an HTTP API endpoint that calls the main function in getAllNotes.js
     # - path: url path is /notes
     # - method: GET request
-    handler: functions/notes/getAllNotes.main
+    handler: src/functions/notes/getAllNotes.main
     events:
       - http:
           path: notes/{userId}
@@ -75,7 +75,7 @@ functions:
     # Defines an HTTP API endpoint that calls the main function in updateNote.js
     # - path: url path is /notes/{id}
     # - method: PUT request
-    handler: functions/notes/updateNote.main
+    handler: src/functions/notes/updateNote.main
     events:
       - http:
           path: notes/{id}
