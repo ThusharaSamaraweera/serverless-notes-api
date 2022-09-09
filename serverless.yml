@@ -70,3 +70,14 @@ functions:
           path: notes/{userId}
           cors: true
           method: get
+
+  updateNote:
+    # Defines an HTTP API endpoint that calls the main function in updateNote.js
+    # - path: url path is /notes/{id}
+    # - method: PUT request
+    handler: functions/notes/updateNote.main
+    events:
+      - http:
+          path: notes/{id}
+          cors: true
+          method: put
