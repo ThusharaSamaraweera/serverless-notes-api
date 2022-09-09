@@ -39,9 +39,23 @@ provider:
 
 functions:
   create:
+    # Defines an HTTP API endpoint that calls the main function in create.js
+    # - path: url path is /notes
+    # - method: POST request
     handler: createNotes.main
     events:
       - http:
           path: notes
           cors: true
           method: post
+
+  getNote:
+    # Defines an HTTP API endpoint that calls the main function in getNote.js
+    # - path: url path is /notes/{id}
+    # - method: GET request
+    handler: functions/notes/getNote.main
+    events:
+      - http:
+          path: notes/{id}
+          cors: true
+          method: get
