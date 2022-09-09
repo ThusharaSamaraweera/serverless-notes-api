@@ -1,14 +1,17 @@
+import { createErrorResponse, createSuccessResponse } from "./responseGenerators";
+
 export default function handler(lambda) {
   return async function (event, context) {
     let body, statusCode;
 
     try {
       // Run the Lambda
-      body = await lambda(event, context);
+      const result = await lambda(event, context);
+      body = createSuccessResponse(result);
       statusCode = 200;
     } catch (e) {
       console.log(e);
-      body = { error: e.message };
+      body = createErrorResponse(e.message);
       statusCode = 500;
     }
 
