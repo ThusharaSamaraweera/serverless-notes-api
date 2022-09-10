@@ -10,12 +10,18 @@ export const main = handler(async (event, context) => {
     Item: {
       userId: data.userId,
       noteId: uuid.v1(),
+      title: data.title,
       content: data.content,
-      createdAt: Date.new(),
+      createdAt: Date.now(),
+      modifiedAt: Date.now(),
     },
   };
 
   await dynamoDb.put(params);
-
-  return params.Item;
+  const result = {
+    ...params.Item,
+    createdAt: new Date(params.Item.createdAt),
+    modifiedAt: new Date(params.Item.modifiedAt),
+  };
+  return result;
 });

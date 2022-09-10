@@ -10,7 +10,6 @@ export const main = handler(async (event, context) => {
     },
   };
 
-  const result = await dynamoDb.delete(params);
-  console.log({result});
+  await dynamoDb.delete(params);
   return;
 });

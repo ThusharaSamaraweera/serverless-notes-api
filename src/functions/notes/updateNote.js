@@ -9,14 +9,18 @@ export const main = handler(async (event, context) => {
       userId: event.pathParameters.userId, // The id of the author
       noteId: event.pathParameters.id, // The id of the note from the path
     },
-    UpdateExpression: "SET content = :content",
+    UpdateExpression: "SET content = :content, title = :title, modifiedAt = :modifiedAt",
     ExpressionAttributeValues: {
-      ":content": data.content || null,
+      ":content": data.content || 'No content',
+      ":title": data.title || 'No title',
+      ":modifiedAt": Date.now(),
     },
     ReturnValues: "ALL_NEW",
   };
 
-  const result = await dynamoDb.update(params);
-
-  return { data: result };
+  let result = await dynamoDb.update(params);
+  result = result.Attributes;
+  result.createdAt = new Date(result.createdAt);
+  result.modifiedAt = new Date(result.modifiedAt);
+  return result;
 });
