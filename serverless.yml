@@ -55,7 +55,7 @@ functions:
     handler: src/functions/notes/getNote.main
     events:
       - http:
-          path: notes/{id}
+          path: notes/{userId}/{id}
           cors: true
           method: get
 
@@ -77,7 +77,7 @@ functions:
     handler: src/functions/notes/updateNote.main
     events:
       - http:
-          path: notes/{id}
+          path: notes/{userId}/{id}
           cors: true
           method: put
   
@@ -88,6 +88,6 @@ functions:
     handler: src/functions/notes/deleteNote.main
     events:
       - http:
-          path: notes/{id}
+          path: notes/{userId}/{id}
           cors: true
           method: delete

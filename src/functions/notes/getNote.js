@@ -14,6 +14,7 @@ export const main = handler(async (event, context) => {
   if (!result.Item) {
     throw new Error("Item not found.");
   }
-
+  result.Item.createdAt = new Date(result.Item.createdAt);
+  result.Item.modifiedAt = new Date(result.Item.modifiedAt);
   return result.Item;
 });
