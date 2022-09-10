@@ -47,6 +47,7 @@ functions:
           path: notes
           cors: true
           method: post
+          authorizer: aws_iam
 
   getNote:
     # Defines an HTTP API endpoint that calls the main function in getNote.js
@@ -58,6 +59,7 @@ functions:
           path: notes/{userId}/{id}
           cors: true
           method: get
+          authorizer: aws_iam
 
   getAllNotes:
     # Defines an HTTP API endpoint that calls the main function in getAllNotes.js
@@ -69,6 +71,7 @@ functions:
           path: notes/{userId}
           cors: true
           method: get
+          authorizer: aws_iam
 
   updateNote:
     # Defines an HTTP API endpoint that calls the main function in updateNote.js
@@ -80,6 +83,7 @@ functions:
           path: notes/{userId}/{id}
           cors: true
           method: put
+          authorizer: aws_iam
   
   deleteNote:
     # Defines an HTTP API endpoint that calls the main function in deleteNote.js
@@ -91,3 +95,4 @@ functions:
           path: notes/{userId}/{id}
           cors: true
           method: delete
+          authorizer: aws_iam

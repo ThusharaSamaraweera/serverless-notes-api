@@ -1,7 +1,11 @@
 {
   "body": "{\"content\":\"content 12\", \"title\":\"title 3\"}",
   "pathParameters": {
-    "id": "6c3f57d0-309e-11ed-9fbd-e748bcf11406",
-    "userId": "122"
+    "id": "f722a960-30f8-11ed-acfe-0fd7d988ef3b"
+  },
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-1234"
+    }
   }
 }

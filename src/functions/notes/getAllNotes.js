@@ -6,7 +6,7 @@ export const main = handler(async (event, context) => {
     TableName: process.env.notesTableName,
     KeyConditionExpression: "userId = :userId",
     ExpressionAttributeValues: {
-      ":userId": event.pathParameters.userId,
+      ":userId": event.requestContext.identity.cognitoIdentityId,
     },
   };
 
