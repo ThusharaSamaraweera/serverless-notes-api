@@ -43,6 +43,7 @@ provider:
         - "Fn::GetAtt": [ UsersTable, Arn ]
 
 functions:
+  # start note APIs
   createNote:
     # Defines an HTTP API endpoint that calls the main function in create.js
     # - path: url path is /notes
@@ -53,7 +54,6 @@ functions:
           path: notes
           cors: true
           method: post
-          authorizer: aws_iam
 
   getNote:
     # Defines an HTTP API endpoint that calls the main function in getNote.js
@@ -65,7 +65,6 @@ functions:
           path: notes/{id}
           cors: true
           method: get
-          authorizer: aws_iam
 
   getAllNotes:
     # Defines an HTTP API endpoint that calls the main function in getAllNotes.js
@@ -77,7 +76,6 @@ functions:
           path: notes
           cors: true
           method: get
-          authorizer: aws_iam
 
   updateNote:
     # Defines an HTTP API endpoint that calls the main function in updateNote.js
@@ -89,7 +87,6 @@ functions:
           path: notes/{id}
           cors: true
           method: put
-          authorizer: aws_iam
   
   deleteNote:
     # Defines an HTTP API endpoint that calls the main function in deleteNote.js
@@ -101,8 +98,10 @@ functions:
           path: notes/{id}
           cors: true
           method: delete
-          authorizer: aws_iam
 
+  # end note APIs
+
+  # start user APIs
   createUser:
     # Defines an HTTP API endpoint that calls the main function in createUser.js
     # - path: url path is /users
@@ -113,6 +112,19 @@ functions:
           path: users
           cors: true
           method: post
+          
+  getUserProfile:
+    # Defines an HTTP API endpoint that calls the main function in getUserProfile.js
+    # - path: url path is /users
+    # - method: GET request
+    handler: src/functions/users/getUserProfile.main
+    events:
+      - http:
+          path: users
+          cors: true
+          method: get  
+
+  # end user APIs
 
 # Create our resources with separate CloudFormation templates
 resources:

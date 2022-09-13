@@ -3,16 +3,15 @@ import dynamoDb from "../../libs/dynamodb-lib";
 
 export const main = handler(async (event, context) => {
   const params = {
-    TableName: process.env.notesTableName,
+    TableName: process.env.usersTableName,
     Key: {
-      userId: event.queryStringParameters.userId, // The id of the author
-      noteId: event.pathParameters.id, // The id of the note from the path
+      userId: event.queryStringParameters.userId, // The id of the user
     },
   };
 
   const result = await dynamoDb.get(params);
   if (!result.Item) {
-    throw new Error("Item not found.");
+    throw new Error("user profile not found.");
   }
   result.Item.createdAt = new Date(result.Item.createdAt);
   result.Item.modifiedAt = new Date(result.Item.modifiedAt);

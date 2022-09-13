@@ -12,7 +12,7 @@ export default function handler(lambda) {
     } catch (e) {
       console.log(e);
       body = createErrorResponse(e.message);
-      statusCode = 500;
+      statusCode = 200;
     }
 
     // Return HTTP response

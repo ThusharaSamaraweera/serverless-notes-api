@@ -6,13 +6,14 @@ export const main = handler(async (event, context) => {
   const params = {
     TableName: process.env.notesTableName,
     Key: {
-      userId: event.requestContext.identity.cognitoIdentityId, // The id of the author
+      userId: event.queryStringParameters.userId, // The id of the author
       noteId: event.pathParameters.id, // The id of the note from the path
     },
-    UpdateExpression: "SET content = :content, title = :title, modifiedAt = :modifiedAt",
+    UpdateExpression:
+      "SET content = :content, title = :title, modifiedAt = :modifiedAt",
     ExpressionAttributeValues: {
-      ":content": data.content || 'No content',
-      ":title": data.title || 'No title',
+      ":content": data.content || "No content",
+      ":title": data.title || "No title",
       ":modifiedAt": Date.now(),
     },
     ReturnValues: "ALL_NEW",
