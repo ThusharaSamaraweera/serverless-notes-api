@@ -15,6 +15,7 @@ custom:
   stage: ${opt:stage, self:provider.stage}
   # Set the table name here so we can use it while testing locally
   notesTableName: ${self:custom.stage}-notes
+  usersTableName: ${self:custom.stage}-users
 
 provider:
   name: aws
@@ -23,6 +24,7 @@ provider:
   region: us-east-1
   environment:
    notesTableName: ${self:custom.notesTableName}
+   usersTableName: ${self:custom.usersTableName}
 
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
@@ -38,6 +40,7 @@ provider:
         - dynamodb:DescribeTable
       Resource:
         - "Fn::GetAtt": [ NotesTable, Arn ]
+        - "Fn::GetAtt": [ UsersTable, Arn ]
 
 functions:
   createNote:
@@ -99,6 +102,17 @@ functions:
           cors: true
           method: delete
           authorizer: aws_iam
+
+  createUser:
+    # Defines an HTTP API endpoint that calls the main function in createUser.js
+    # - path: url path is /users
+    # - method: POST request
+    handler: src/functions/users/createUser.main
+    events:
+      - http:
+          path: users
+          cors: true
+          method: post
 
 # Create our resources with separate CloudFormation templates
 resources:
