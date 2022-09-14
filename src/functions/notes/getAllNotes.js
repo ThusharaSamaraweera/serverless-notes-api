@@ -6,6 +6,7 @@ export const main = handler(async (event, context) => {
     TableName: process.env.notesTableName,
     KeyConditionExpression: "userId = :userId",
     ExpressionAttributeValues: {
+      // todo : get userId from cognito
       ":userId": event.queryStringParameters.userId,
     },
   };
