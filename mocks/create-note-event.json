@@ -1,8 +1,3 @@
 {
-  "body": "{\"content\":\"content 2\", \"title\":\"title 2\"}",
-  "requestContext": {
-    "identity": {
-      "cognitoIdentityId": "USER-SUB-1235"
-    }
-  }
+  "body": "{\"userId\":\"123\",\"content\":\"content 2\", \"title\":\"title 2\"}"
 }

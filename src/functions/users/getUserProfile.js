@@ -5,6 +5,7 @@ export const main = handler(async (event, context) => {
   const params = {
     TableName: process.env.usersTableName,
     Key: {
+      // todo : get userId from cognito
       userId: event.queryStringParameters.userId, // The id of the user
     },
   };
