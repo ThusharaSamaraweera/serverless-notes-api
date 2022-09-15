@@ -1,6 +1,7 @@
 import handler from "../../libs/handler-lib";
 import dynamoDb from "../../libs/dynamodb-lib";
 import { APIError } from "../../utils/exceptions/NoteAppException";
+import { logger } from "../../utils/logger";
 
 export const main = handler(async (event, context) => {
   const params = {
@@ -13,9 +14,10 @@ export const main = handler(async (event, context) => {
   };
 
   try {
+    logger.info(`Deleting note ${params.Key.noteId} for user ${params.Key.userId}`);
     await dynamoDb.delete(params);
   } catch (error) {
-    console.log(error);
+    logger.error(`Error deleting note ${params.Key.noteId} for user ${params.Key.userId} - ${error.message}`);
     throw new APIError(error.message);
   }
   return;

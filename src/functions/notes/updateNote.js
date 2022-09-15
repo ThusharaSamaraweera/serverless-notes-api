@@ -4,6 +4,7 @@ import {
   APIError,
   NotFoundException,
 } from "../../utils/exceptions/NoteAppException";
+import { logger } from "../../utils/logger";
 
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
@@ -29,9 +30,10 @@ export const main = handler(async (event, context) => {
   // update note
   let result;
   try {
+    logger.info(`Updating note ${params.Key.noteId} for user ${params.Key.userId}`);
     result = await dynamoDb.update(params);
   } catch (error) {
-    console.log(error);
+    logger.error(`Error updating note ${params.Key.noteId} for user ${params.Key.userId} - ${error.message}`);
     // if note not found
     if (error.message === "The conditional request failed") {
       throw new NotFoundException("Note not found");

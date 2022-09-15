@@ -2,6 +2,7 @@ import * as uuid from "uuid";
 import handler from "../../libs/handler-lib";
 import dynamoDb from "../../libs/dynamodb-lib";
 import { APIError } from "../../utils/exceptions/NoteAppException";
+import { logger } from "../../utils/logger";
 
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
@@ -19,9 +20,10 @@ export const main = handler(async (event, context) => {
   };
 
   try {
+    logger.info(`Inserting new note ${params.Item.noteId} for user ${params.Item.userId}`);
     await dynamoDb.put(params);
   } catch (error) {
-    console.log(error);
+    logger.error(`Error inserting new note ${params.Item.noteId} for user ${params.Item.userId}`);
     throw new APIError(error.message);
   }
   const result = {
