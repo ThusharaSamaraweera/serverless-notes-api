@@ -4,26 +4,32 @@ import {
   APIError,
   NotFoundException,
 } from "../../utils/exceptions/NoteAppException";
+import { logger } from "../../utils/logger";
 
 export const main = handler(async (event, context) => {
+  const userId = event.queryStringParameters.userId;
+  const noteId = event.pathParameters.id;
+
   // param for get note
   const params = {
     TableName: process.env.notesTableName,
     Key: {
       // todo : get userId from cognito
-      userId: event.queryStringParameters.userId, // The id of the author
-      noteId: event.pathParameters.id, // The id of the note from the path
+      userId: userId,
+      noteId: noteId,
     },
   };
   let result;
   // get note from note table
   try {
+    logger.info(`Getting Note ${noteId} from note table`);
     result = await dynamoDb.get(params);
   } catch (error) {
-    console.log(error);
+    logger.error(`API Error - ${error.message}`);
     throw new APIError(error.message);
   }
   if (!result.Item) {
+    logger.warn(`Note ${noteId} not found`);
     throw new NotFoundException("Note not found");
   }
   result.Item.createdAt = new Date(result.Item.createdAt);

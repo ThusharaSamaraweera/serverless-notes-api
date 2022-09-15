@@ -1,3 +1,4 @@
+import { logger } from "../utils/logger";
 import {
   createErrorResponse,
   createSuccessResponse,
@@ -13,7 +14,7 @@ export default function handler(lambda) {
       body = createSuccessResponse(result);
       statusCode = 200;
     } catch (e) {
-      console.log(e);
+      logger.error("API Error - " + e.message);
       body = createErrorResponse(e.message);
       statusCode = e.httpCode || 500;
     }
