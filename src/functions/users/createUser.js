@@ -1,5 +1,6 @@
 import handler from "../../libs/handler-lib";
 import dynamoDb from "../../libs/dynamodb-lib";
+import { APIError } from "../../utils/exceptions/NoteAppException";
 
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
@@ -22,7 +23,12 @@ export const main = handler(async (event, context) => {
   };
 
   // save the user to the database
-  await dynamoDb.put(params);
+  try {
+    await dynamoDb.put(params);
+  } catch (error) {
+    console.log(error);
+    throw new APIError(error.message);
+  }
 
   const result = {
     ...params.Item,

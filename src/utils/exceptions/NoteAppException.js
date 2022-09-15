@@ -10,7 +10,7 @@ export class NoteAppException extends Error {
 
 export class NotFoundException extends NoteAppException {
   constructor() {
-    super('Not found', 404);
+    super("Not found", 404);
   }
 }
 

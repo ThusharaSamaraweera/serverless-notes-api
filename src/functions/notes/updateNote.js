@@ -16,14 +16,14 @@ export const main = handler(async (event, context) => {
     },
     UpdateExpression:
       "SET content = :content, title = :title, modifiedAt = :modifiedAt",
-    ConditionExpression: "attribute_exists(noteId) AND attribute_exists(userId)",
+    ConditionExpression:
+      "attribute_exists(noteId) AND attribute_exists(userId)",
     ExpressionAttributeValues: {
       ":content": data.content || "No content",
       ":title": data.title || "No title",
       ":modifiedAt": Date.now(),
     },
     ReturnValues: "ALL_NEW",
-
   };
 
   // update note
@@ -33,7 +33,7 @@ export const main = handler(async (event, context) => {
   } catch (error) {
     console.log(error);
     // if note not found
-    if (error.message === 'The conditional request failed') {
+    if (error.message === "The conditional request failed") {
       throw new NotFoundException("Note not found");
     }
     throw new APIError(error.message);
