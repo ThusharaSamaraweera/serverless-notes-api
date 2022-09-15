@@ -1,4 +1,7 @@
-import { createErrorResponse, createSuccessResponse } from "./responseGenerators";
+import {
+  createErrorResponse,
+  createSuccessResponse,
+} from "./responseGenerators";
 
 export default function handler(lambda) {
   return async function (event, context) {
@@ -12,7 +15,7 @@ export default function handler(lambda) {
     } catch (e) {
       console.log(e);
       body = createErrorResponse(e.message);
-      statusCode = 200;
+      statusCode = e.httpCode || 500;
     }
 
     // Return HTTP response

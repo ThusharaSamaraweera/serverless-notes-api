@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "string"
+      
+    },
+    "title": {
+      "type": "string",
+      "minLength": 6,
+      "maxLength": 50
+    },
+    "content": {
+      "type": "string",
+      "maxLength": 250
+    }
+  }
+}
