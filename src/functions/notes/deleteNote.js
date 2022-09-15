@@ -1,5 +1,6 @@
 import handler from "../../libs/handler-lib";
 import dynamoDb from "../../libs/dynamodb-lib";
+import { APIError } from "../../utils/exceptions/NoteAppException";
 
 export const main = handler(async (event, context) => {
   const params = {
@@ -11,6 +12,11 @@ export const main = handler(async (event, context) => {
     },
   };
 
-  await dynamoDb.delete(params);
+  try {
+    await dynamoDb.delete(params);
+  } catch (error) {
+    console.log(error);
+    throw new APIError(error.message);
+  }
   return;
 });

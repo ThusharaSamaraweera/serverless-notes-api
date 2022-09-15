@@ -13,3 +13,9 @@ export class NotFoundException extends NoteAppException {
     super('Not found', 404);
   }
 }
+
+export class APIError extends NoteAppException {
+  constructor(message) {
+    super(message, 500);
+  }
+}

@@ -1,8 +1,12 @@
 import handler from "../../libs/handler-lib";
 import dynamoDb from "../../libs/dynamodb-lib";
-import { NotFoundException } from "../../utils/exceptions/NoteAppException";
+import {
+  APIError,
+  NotFoundException,
+} from "../../utils/exceptions/NoteAppException";
 
 export const main = handler(async (event, context) => {
+  // param for get note
   const params = {
     TableName: process.env.notesTableName,
     Key: {
@@ -11,10 +15,16 @@ export const main = handler(async (event, context) => {
       noteId: event.pathParameters.id, // The id of the note from the path
     },
   };
-
-  const result = await dynamoDb.get(params);
+  let result;
+  // get note from note table
+  try {
+    result = await dynamoDb.get(params);
+  } catch (error) {
+    console.log(error);
+    throw new APIError(error.message);
+  }
   if (!result.Item) {
-    throw new NotFoundException();
+    throw new NotFoundException("Note not found");
   }
   result.Item.createdAt = new Date(result.Item.createdAt);
   result.Item.modifiedAt = new Date(result.Item.modifiedAt);

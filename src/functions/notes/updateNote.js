@@ -1,5 +1,9 @@
 import handler from "../../libs/handler-lib";
 import dynamoDb from "../../libs/dynamodb-lib";
+import {
+  APIError,
+  NotFoundException,
+} from "../../utils/exceptions/NoteAppException";
 
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
@@ -12,15 +16,29 @@ export const main = handler(async (event, context) => {
     },
     UpdateExpression:
       "SET content = :content, title = :title, modifiedAt = :modifiedAt",
+    ConditionExpression: "attribute_exists(noteId) AND attribute_exists(userId)",
     ExpressionAttributeValues: {
       ":content": data.content || "No content",
       ":title": data.title || "No title",
       ":modifiedAt": Date.now(),
     },
     ReturnValues: "ALL_NEW",
+
   };
 
-  let result = await dynamoDb.update(params);
+  // update note
+  let result;
+  try {
+    result = await dynamoDb.update(params);
+  } catch (error) {
+    console.log(error);
+    // if note not found
+    if (error.message === 'The conditional request failed') {
+      throw new NotFoundException("Note not found");
+    }
+    throw new APIError(error.message);
+  }
+
   result = result.Attributes;
   result.createdAt = new Date(result.createdAt);
   result.modifiedAt = new Date(result.modifiedAt);
