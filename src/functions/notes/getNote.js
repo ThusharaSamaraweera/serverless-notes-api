@@ -25,12 +25,10 @@ export const main = handler(async (event, context) => {
     logger.info(`Getting Note ${noteId} from note table`);
     result = await dynamoDb.get(params);
   } catch (error) {
-    logger.error(`API Error - ${error.message}`);
     throw new APIError(error.message);
   }
   if (!result.Item) {
-    logger.warn(`Note ${noteId} not found`);
-    throw new NotFoundException("Note not found");
+    throw new NotFoundException(`Note ${noteId} not found`);
   }
   result.Item.createdAt = new Date(result.Item.createdAt);
   result.Item.modifiedAt = new Date(result.Item.modifiedAt);

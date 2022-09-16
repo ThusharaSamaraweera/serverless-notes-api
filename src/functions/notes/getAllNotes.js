@@ -19,9 +19,6 @@ export const main = handler(async (event, context) => {
     const result = await dynamoDb.query(params);
     return result.Items;
   } catch (error) {
-    logger.error(
-      `Error getting all notes for user ${params.ExpressionAttributeValues[":userId"]} - ${error.message}`
-    );
     throw new APIError(error.message);
   }
 });

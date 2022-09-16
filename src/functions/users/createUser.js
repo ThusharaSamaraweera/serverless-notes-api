@@ -28,7 +28,6 @@ export const main = handler(async (event, context) => {
     logger.info(`Inserting new user ${params.Item.userId}`);
     await dynamoDb.put(params);
   } catch (error) {
-    logger.error(`Error inserting new user ${params.Item.userId} - ${error.message}`);
     throw new APIError(error.message);
   }
 

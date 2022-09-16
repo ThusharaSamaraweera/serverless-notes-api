@@ -14,7 +14,7 @@ export default function handler(lambda) {
       body = createSuccessResponse(result);
       statusCode = 200;
     } catch (e) {
-      logger.error("API Error - " + e.message);
+      logger.error("Server Error - " + e.message);
       body = createErrorResponse(e.message);
       statusCode = e.httpCode || 500;
     }

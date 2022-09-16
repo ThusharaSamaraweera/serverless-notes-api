@@ -14,6 +14,7 @@ export const main = handler(async (event, context) => {
       noteId: uuid.v1(),
       title: data.title,
       content: data.content,
+      categoryId: data.categoryId,
       createdAt: Date.now(),
       modifiedAt: Date.now(),
     },
@@ -23,7 +24,6 @@ export const main = handler(async (event, context) => {
     logger.info(`Inserting new note ${params.Item.noteId} for user ${params.Item.userId}`);
     await dynamoDb.put(params);
   } catch (error) {
-    logger.error(`Error inserting new note ${params.Item.noteId} for user ${params.Item.userId}`);
     throw new APIError(error.message);
   }
   const result = {

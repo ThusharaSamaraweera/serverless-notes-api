@@ -15,13 +15,12 @@ export const main = handler(async (event, context) => {
   try {
     result = await dynamoDb.get(params);
   } catch (error) {
-    console.log(error);
     throw new APIError(error.message);
   }
 
   // if user not found
   if (!result.Item) {
-    throw new Error("user profile not found.");
+    throw new Error(`user profile ${params.Key.userId} not found.`);
   }
   result.Item.createdAt = new Date(result.Item.createdAt);
   result.Item.modifiedAt = new Date(result.Item.modifiedAt);
