@@ -2,9 +2,13 @@ import handler from "../../libs/handler-lib";
 import dynamoDb from "../../libs/dynamodb-lib";
 import { APIError } from "../../utils/exceptions/NoteAppException";
 import { logger } from "../../utils/logger";
+import userValidator from "../../utils/validations/userValidator";
 
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
+
+  // validate the request body
+  userValidator.createUser(data);
 
   const params = {
     TableName: process.env.usersTableName,
