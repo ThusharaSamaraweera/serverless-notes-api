@@ -15,7 +15,7 @@ export default function handler(lambda) {
       statusCode = 200;
     } catch (e) {
       logger.error("Server Error - " + e.message);
-      body = createErrorResponse(e.message);
+      body = createErrorResponse(e.message, e.description);
       statusCode = e.httpCode || 500;
     }
 

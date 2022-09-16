@@ -5,9 +5,13 @@ import {
   NotFoundException,
 } from "../../utils/exceptions/NoteAppException";
 import { logger } from "../../utils/logger";
+import noteValidator from "../../utils/validations/noteValidator";
 
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
+
+  noteValidator.updateNote(data);
+
   const params = {
     TableName: process.env.notesTableName,
     Key: {

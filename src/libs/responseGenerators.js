@@ -1,7 +1,8 @@
-export function createErrorResponse(message) {
+export function createErrorResponse(message, description) {
   return {
     status: "error",
     message: message || "Internal server error",
+    description: description || "No additional description",
   };
 }
 
