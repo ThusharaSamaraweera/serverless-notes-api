@@ -1,6 +1,9 @@
 import AWS from "aws-sdk";
+import { logger } from "../utils/logger";
 
 const client = new AWS.DynamoDB.DocumentClient();
+
+logger.info("DynamoDB client created");
 
 export default {
   get: (params) => client.get(params).promise(),
