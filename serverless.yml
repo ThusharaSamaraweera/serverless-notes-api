@@ -76,7 +76,7 @@ functions:
           path: notes
           cors: true
           method: get
-
+    
   updateNote:
     # Defines an HTTP API endpoint that calls the main function in updateNote.js
     # - path: url path is /notes/{id}

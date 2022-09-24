@@ -20,13 +20,14 @@ export const main = handler(async (event, context) => {
       noteId: event.pathParameters.id, // The id of the note from the path
     },
     UpdateExpression:
-      "SET content = :content, title = :title, modifiedAt = :modifiedAt, categoryId = :categoryId",
+      "SET content = :content, title = :title, modifiedAt = :modifiedAt, categoryId = :categoryId, status = :status",
     ConditionExpression:
       "attribute_exists(noteId) AND attribute_exists(userId)",
     ExpressionAttributeValues: {
       ":content": data.content || "No content",
       ":title": data.title || "No title",
       ":categoryId": data.categoryId,
+      ":status": data.status,
       ":modifiedAt": Date.now(),
     },
     ReturnValues: "ALL_NEW",

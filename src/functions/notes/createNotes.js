@@ -17,6 +17,7 @@ export const main = handler(async (event, context) => {
       userId: data.userId,
       noteId: uuid.v1(),
       title: data.title,
+      status: data.status,
       content: data.content,
       categoryId: data.categoryId,
       createdAt: Date.now(),
