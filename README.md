@@ -1,4 +1,4 @@
-## [Frontend GitHub repo] (https://github.com/ThusharaSamaraweera/serverless-note-app-frontend.com)
+## [Frontend GitHub repo] (https://github.com/ThusharaSamaraweera/serverless-note-app-frontend)
 
 # Serverless Node.js Starter [![Seed Status](https://api.seed.run/serverless-stack/serverless-nodejs-starter/stages/prod/build_badge)](https://console.seed.run/serverless-stack/serverless-nodejs-starter)
 
