@@ -1,8 +1,14 @@
 {
   "pathParameters": {
-    "id": "f722a960-30f8-11ed-acfe-0fd7d988ef3b"
+    "id": "641c5be0-3c4a-11ed-9e0e-55bc9d703aea"
   },
   "queryStringParameters": {
-    "userId": "124"
+    "userId": "122"
+  },
+  "event":{
+    "requestContext":{
+      "path": "event.requestContext.path",
+      "httpMethod": "event.requestContext.httpMethod"
+    }
   }
 }

@@ -54,6 +54,9 @@ functions:
           path: notes
           cors: true
           method: post
+          request: 
+            schema:
+              application/json: ${file(src/utils/validations/)}
 
   getNote:
     # Defines an HTTP API endpoint that calls the main function in getNote.js
